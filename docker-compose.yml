@@ -22,13 +22,13 @@ services:
       net:
         ipv4_address: 172.20.20.10
 
-  datanode:
+  datanode1:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
-    container_name: datanode
-    hostname: datanode
+    container_name: datanode1
+    hostname: datanode1
     restart: always
     volumes:
-      - hadoop_datanode:/hadoop/dfs/data
+      - hadoop_datanode-1:/hadoop/dfs/data
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
       CORE_CONF_fs_defaultFS: hdfs://namenode:9000
@@ -38,7 +38,41 @@ services:
       - ./hadoop.env
     networks:
       net:
-        ipv4_address: 172.20.20.11
+        ipv4_address: 172.20.20.7
+  datanode2:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode2
+    hostname: datanode2
+    restart: always
+    volumes:
+      - hadoop_datanode-2:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
+    ports:
+      - "9865:9865"
+    env_file:
+      - ./hadoop.env
+    networks:
+      net:
+        ipv4_address: 172.20.20.8
+  datanode3:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode3
+    hostname: datanode3
+    restart: always
+    volumes:
+      - hadoop_datanode-3:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
+    ports:
+      - "9866:9866"
+    env_file:
+      - ./hadoop.env
+    networks:
+      net:
+        ipv4_address: 172.20.20.9
 
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
@@ -95,7 +129,7 @@ services:
     hostname: spark-master
     depends_on:
       - namenode
-      - datanode
+      - datanode1
     ports:
       - "8080:8080"
       - "7077:7077"
@@ -130,6 +164,8 @@ networks:
 
 volumes:
   hadoop_namenode:
-  hadoop_datanode:
+  hadoop_datanode-1:
+  hadoop_datanode-2:
+  hadoop_datanode-3:
   hadoop_historyserver:
 
