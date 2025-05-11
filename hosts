@@ -1,0 +1,10 @@
+172.20.20.10 namenode
+172.20.20.11 datanode
+172.20.20.12 resourcemanager
+172.20.20.13 nodemanager
+172.20.20.14 historyserver
+172.20.20.15 spark-master
+172.20.20.16 spark-worker
+172.20.20.17 hive-server
+172.20.20.18 hive-metastore
+172.20.20.20 presto-coordinator
