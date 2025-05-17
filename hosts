@@ -1,5 +1,7 @@
 172.20.20.10 namenode
 172.20.20.11 datanode
+172.20.20.8 datanode2
+172.20.20.9 datanode3
 172.20.20.12 resourcemanager
 172.20.20.13 nodemanager
 172.20.20.14 historyserver
